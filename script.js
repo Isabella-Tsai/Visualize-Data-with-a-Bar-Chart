@@ -21,17 +21,14 @@ let padding = 40
 
 let svg = d3.select("body")
             .append("svg")
+            .attr('width', width)
+            .attr('height',height)
 
 let title = svg.append("text")
                 .attr("id","title")
                 .attr("x", 350)
                 .attr("y", 30)
                 .text("United State GDP");
-
-let drawCanvas = () => {
-    svg.attr('width', width)
-    svg.attr('height',height)
-}
 
 let generateScale = () => {
 
@@ -125,14 +122,13 @@ let generateAxes = () => {
 }
 
 req.open('GET', url, true)
+req.send()
 req.onload = () => {
     data = JSON.parse(req.responseText)
     values = data.data
-    console.log(values)
-    drawCanvas()
     generateScale()
     drawBars()
     generateAxes()
 }
-req.send()
+
 
